@@ -1,0 +1,31 @@
+stages:
+  - build
+  - test
+  - release
+
+image: docker:latest
+services:
+  - docker:dind
+
+build_job:
+  stage: build
+  script:
+    - docker login -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD" "$CI_REGISTRY"
+    - docker build --tag $CI_REGISTRY_IMAGE:test .
+    - docker push $CI_REGISTRY_IMAGE:test
+
+test_job:
+  stage: test
+  script:
+    - docker pull $CI_REGISTRY_IMAGE:test
+    - docker run $CI_REGISTRY_IMAGE:test /app/test.py
+
+release_job:
+  stage: release
+  script:
+    - docker login -u "gitlab-ci-token" -p "$CI_BUILD_TOKEN" $CI_REGISTRY
+    - docker pull $CI_REGISTRY_IMAGE:test
+    - docker tag $CI_REGISTRY_IMAGE:test $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:latest
+
+

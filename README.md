@@ -1,11 +1,12 @@
-## My Project
+##  Continuous Integration with Gitlab
 
-TODO: Fill this README out!
+An example of a Gitlab Continuous Integration pipeline.
 
-Be sure to:
+Requirements:
 
-* Change the title in this README
-* Edit your repository description on GitHub
+- a [Gitlab account](https://gitlab.com/users/sign_up)
+- a Pay as you call [Openweather API key](https://openweathermap.org/api)
+- a Github Personal Access Token for importing the repository to Gitlab
 
 ## Security
 
