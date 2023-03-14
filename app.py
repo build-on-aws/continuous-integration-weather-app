@@ -5,7 +5,7 @@ import json
 app = Flask(__name__)
 
 # API Key for OpenWeatherMap
-api_key = <"your_api_key">
+api_key = "<your_api_key>"
 
 @app.route("/")
 def index():
